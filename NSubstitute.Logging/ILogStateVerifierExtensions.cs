@@ -29,7 +29,7 @@ namespace NSubstitute.Logging
 
         internal static bool MessageMatches(this LogStateVerifier verifier, string message, params object[] args)
         {
-            if (verifier.MessageTemplate != message)
+            if (verifier.OriginalFormat != message)
             {
                 return false;
             }

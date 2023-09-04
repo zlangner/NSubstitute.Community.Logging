@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Extensions.Logging;
 using Xunit;
 
 namespace NSubstitute.Logging.Test
 {
-    [Trait("Category", "Unit")]
     public class LoggerExtensionsTests
     {
         private readonly ILogger Target = Substitute.For<ILogger>();

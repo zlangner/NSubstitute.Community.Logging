@@ -1,12 +1,10 @@
-﻿using System;
+﻿using NSubstitute.Logging.Internals;
+using System;
 using System.Collections.Generic;
-using Microsoft.Extensions.Logging;
-using NSubstitute.Logging.Internals;
 using Xunit;
 
 namespace NSubstitute.Logging.Test
 {
-    [Trait("Category", "Unit")]
     public class LogStateVerifierTest
     {
         [Fact]
@@ -95,7 +93,7 @@ namespace NSubstitute.Logging.Test
         }
 
         [Fact]
-        public void MessageTemplate_SameWhenProvided()
+        public void OriginalFormat_SameWhenProvided()
         {
             string messageTemplate = "I am the log";
             IReadOnlyList<KeyValuePair<string, object>> state = new List<KeyValuePair<string, object>>
@@ -105,19 +103,19 @@ namespace NSubstitute.Logging.Test
 
             var target = new LogStateVerifier(state);
 
-            Assert.NotNull(target.MessageTemplate);
-            Assert.Same(messageTemplate, target.MessageTemplate);
+            Assert.NotNull(target.OriginalFormat);
+            Assert.Same(messageTemplate, target.OriginalFormat);
         }
 
         [Fact]
-        public void MessageTemplate_NoErrorWhenNotProvided()
+        public void OriginalFormat_NoErrorWhenNotProvided()
         {
             IReadOnlyList<KeyValuePair<string, object>> state = new List<KeyValuePair<string, object>>();
 
             var target = new LogStateVerifier(state);
 
-            Assert.Null(target.MessageTemplate);
-            Assert.Same(default(string), target.MessageTemplate);
+            Assert.Null(target.OriginalFormat);
+            Assert.Same(default(string), target.OriginalFormat);
         }
     }
 }

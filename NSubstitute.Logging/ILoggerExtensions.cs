@@ -10,7 +10,6 @@ namespace NSubstitute.Logging
     /// </summary>
     public static class ILoggerExtensions
     {
-
         /// <summary>
         /// Formats and writes a log message at the specified log level.
         /// </summary>
@@ -50,7 +49,7 @@ namespace NSubstitute.Logging
                 .Log(
                     logLevel,
                     Arg.Any<EventId>(),
-                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => new LogStateVerifier(list).MessageTemplate == message),
+                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => new LogStateVerifier(list).OriginalFormat == message),
                     Arg.Any<Exception>(),
                     Arg.Any<Func<IReadOnlyList<KeyValuePair<string, object>>, Exception, string>>()
                 );
@@ -74,7 +73,7 @@ namespace NSubstitute.Logging
                 .Log(
                     logLevel,
                     eventId,
-                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => new LogStateVerifier(list).MessageTemplate == message),
+                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => new LogStateVerifier(list).OriginalFormat == message),
                     Arg.Any<Exception>(),
                     Arg.Any<Func<IReadOnlyList<KeyValuePair<string, object>>, Exception, string>>()
                 );
@@ -121,7 +120,7 @@ namespace NSubstitute.Logging
                 .Log(
                     logLevel,
                     Arg.Any<EventId>(),
-                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => new LogStateVerifier(list).MessageTemplate == message),
+                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => new LogStateVerifier(list).OriginalFormat == message),
                     exception,
                     Arg.Any<Func<IReadOnlyList<KeyValuePair<string, object>>, Exception, string>>()
                 );
@@ -146,7 +145,7 @@ namespace NSubstitute.Logging
                 .Log(
                     logLevel,
                     eventId,
-                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => new LogStateVerifier(list).MessageTemplate == message),
+                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => new LogStateVerifier(list).OriginalFormat == message),
                     exception,
                     Arg.Any<Func<IReadOnlyList<KeyValuePair<string, object>>, Exception, string>>()
                 );
@@ -159,10 +158,10 @@ namespace NSubstitute.Logging
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="logLevel"></param>
-        /// <param name="match"></param>
+        /// <param name="predicate"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static void CallToLog(this ILogger logger, LogLevel logLevel, Func<ILogStateVerifier, bool> match)
+        public static void CallToLog(this ILogger logger, LogLevel logLevel, Func<ILogStateVerifier, bool> predicate)
         {
             if (logger == null)
             {
@@ -173,7 +172,7 @@ namespace NSubstitute.Logging
                 .Log(
                     logLevel,
                     Arg.Any<EventId>(),
-                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => match(new LogStateVerifier(list))),
+                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => predicate(new LogStateVerifier(list))),
                     Arg.Any<Exception>(),
                     Arg.Any<Func<IReadOnlyList<KeyValuePair<string, object>>, Exception, string>>()
                 );
@@ -185,10 +184,10 @@ namespace NSubstitute.Logging
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="logLevel">Entry will be written on this level.</param>
         /// <param name="eventId">The event id associated with the log.</param>
-        /// <param name="match"></param>
+        /// <param name="predicate"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static void CallToLog(this ILogger logger, LogLevel logLevel, EventId eventId, Func<ILogStateVerifier, bool> match)
+        public static void CallToLog(this ILogger logger, LogLevel logLevel, EventId eventId, Func<ILogStateVerifier, bool> predicate)
         {
             if (logger == null)
             {
@@ -199,7 +198,7 @@ namespace NSubstitute.Logging
                 .Log(
                     logLevel,
                     eventId,
-                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => match(new LogStateVerifier(list))),
+                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => predicate(new LogStateVerifier(list))),
                     Arg.Any<Exception>(),
                     Arg.Any<Func<IReadOnlyList<KeyValuePair<string, object>>, Exception, string>>()
                 );
@@ -211,10 +210,10 @@ namespace NSubstitute.Logging
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="logLevel">Entry will be written on this level.</param>
         /// <param name="exception">The exception to log.</param>
-        /// <param name="match"></param>
+        /// <param name="predicate"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static void CallToLog(this ILogger logger, LogLevel logLevel, Exception exception, Func<ILogStateVerifier, bool> match)
+        public static void CallToLog(this ILogger logger, LogLevel logLevel, Exception exception, Func<ILogStateVerifier, bool> predicate)
         {
             if (logger == null)
             {
@@ -225,7 +224,7 @@ namespace NSubstitute.Logging
                 .Log(
                     logLevel,
                     Arg.Any<EventId>(),
-                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => match(new LogStateVerifier(list))),
+                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => predicate(new LogStateVerifier(list))),
                     exception,
                     Arg.Any<Func<IReadOnlyList<KeyValuePair<string, object>>, Exception, string>>()
                 );
@@ -238,10 +237,10 @@ namespace NSubstitute.Logging
         /// <param name="logLevel">Entry will be written on this level.</param>
         /// <param name="eventId">The event id associated with the log.</param>
         /// <param name="exception">The exception to log.</param>
-        /// <param name="match"></param>
+        /// <param name="predicate"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static void CallToLog(this ILogger logger, LogLevel logLevel, EventId eventId, Exception exception, Func<ILogStateVerifier, bool> match)
+        public static void CallToLog(this ILogger logger, LogLevel logLevel, EventId eventId, Exception exception, Func<ILogStateVerifier, bool> predicate)
         {
             if (logger == null)
             {
@@ -252,7 +251,7 @@ namespace NSubstitute.Logging
                 .Log(
                     logLevel,
                     eventId,
-                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => match(new LogStateVerifier(list))),
+                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => predicate(new LogStateVerifier(list))),
                     exception,
                     Arg.Any<Func<IReadOnlyList<KeyValuePair<string, object>>, Exception, string>>()
                 );

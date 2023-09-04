@@ -1,59 +1,24 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Extensions.Logging;
 using Xunit;
 
 namespace NSubstitute.Logging.Test
 {
-    [Trait("Category", "Unit")]
-    public class ILoggerVerificationExtensionsTests_CallToLog
+    public class CallToLogPredicateTests
     {
         private readonly ILogger Target = Substitute.For<ILogger>();
 
         [Fact]
-        public void JustByLogType()
-        {
-            var now = DateTime.Now;
-            Microsoft.Extensions.Logging.LoggerExtensions.LogWarning(Target, "there were {oopies} things you might want to know about. {where} {when}", 13, "earth", now);
-            Microsoft.Extensions.Logging.LoggerExtensions.LogWarning(Target, "whatever, one more");
-
-            Target.Received(2)
-                .CallToLog(LogLevel.Warning); // any warning
-
-            // no information
-            Target.DidNotReceive()
-                .CallToLog(LogLevel.Information);
-        }
-
-        [Fact]
-        public void ByLogTypeAndException()
-        {
-            var ex = new Exception();
-            Microsoft.Extensions.Logging.LoggerExtensions.LogError(Target, ex, "something bad happened");
-
-            Target.Received()
-                .CallToLog(LogLevel.Error, ex); // any error with this exception
-
-            Target.Received(1)
-                .CallToLog(LogLevel.Error, "something bad happened"); // any error with this message template
-
-            Target.Received(1)
-                .CallToLog(LogLevel.Error, ex, "something bad happened"); // this error and this message template
-
-            var otherEx = new Exception();
-            Target.DidNotReceive()
-                .CallToLog(LogLevel.Error, otherEx);
-        }
-
-        [Fact]
-        public void BasicStructuredLogging_Warning()
+        public void CallToLog_ILogStateVerifier_exact_predicate()
         {
             var now = DateTime.Now;
             Microsoft.Extensions.Logging.LoggerExtensions.LogWarning(Target, "there were {oopies} things you might want to know about. {where} {when}", 13, "earth", now);
 
-            // this verifies the message template
+            // this verifies the log matches exactly
             Target.Received(1)
                 .CallToLog(LogLevel.Warning,
-                _ => _.MessageTemplate.Equals("there were {oopies} things you might want to know about. {where} {when}")
+                _ => _.OriginalFormat.Equals("there were {oopies} things you might want to know about. {where} {when}")
                     && _.KeyEquals("oopies", 13)
                     && _.KeyEquals("where", "earth")
                     && _.KeyEquals("when", now)
@@ -61,14 +26,31 @@ namespace NSubstitute.Logging.Test
         }
 
         [Fact]
-        public void CannotFindLogsThatDidNotHappen()
+        public void CallToLog_ILogStateVerifier_general_predicate()
+        {
+            var now = DateTime.Now;
+            Microsoft.Extensions.Logging.LoggerExtensions.LogWarning(Target, "there were {oopies} things you might want to know about. {where} {when}", 13, "earth", now);
+            var planets = new[] { "mars", "earth" };
+
+            // this verifies the log matches generally
+            Target.Received(1)
+                .CallToLog(LogLevel.Warning,
+                _ => _.OriginalFormat.StartsWith("there were {oopies}")
+                    && _.TryGetValue("oopies", out int oopies) && oopies > 10
+                    && _.TryGetValue("where", out string where) && planets.Contains(where)
+                    && _.TryGetValue("when", out DateTime when) && when <= DateTime.Now
+                );
+        }
+
+        [Fact]
+        public void CallToLog_ILogStateVerifier_negative_predicate()
         {
             var now = DateTime.Now;
             Microsoft.Extensions.Logging.LoggerExtensions.LogCritical(Target, "Application {AppName} could not load {When}", "Web 2.0", now);
 
             // sanity check, make sure the message template didn't change
             Target.Received(1)
-                .CallToLog(LogLevel.Critical, _ => _.MessageTemplate.Equals("Application {AppName} could not load {When}"));
+                .CallToLog(LogLevel.Critical, "Application {AppName} could not load {When}");
 
             // Assert
             Target.DidNotReceive()
@@ -82,7 +64,7 @@ namespace NSubstitute.Logging.Test
         }
 
         [Fact]
-        public void KeyCaseMattersToKeyEquals()
+        public void CallToLog_ILogStateVerifier_KeyEquals_Key_Case_Matters()
         {
             Microsoft.Extensions.Logging.LoggerExtensions.LogInformation(Target, "the number is {Number}", 42);
 
@@ -99,5 +81,20 @@ namespace NSubstitute.Logging.Test
                 .CallToLog(LogLevel.Information, _ => _.KeyEquals("Number", 24));
         }
 
+        [Fact]
+        public void CallToLog_ILogStateVerifier_OriginalFormat_Is_Same_Reference()
+        {
+            var template = "This is a log message";
+            Microsoft.Extensions.Logging.LoggerExtensions.LogTrace(Target, template);
+
+            Target.Received(1)
+                .CallToLog(LogLevel.Trace, _ => object.ReferenceEquals(_.OriginalFormat, template));
+
+            Target.Received(1)
+                .CallToLog(LogLevel.Trace, _ => _.OriginalFormat.Equals(template));
+
+            Target.Received(1)
+                .CallToLog(LogLevel.Trace, template);
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace NSubstitute.Logging.Internals
         }
 
         /// <inheritdoc/>
-        public string MessageTemplate
+        public string OriginalFormat
         {
             get
             {

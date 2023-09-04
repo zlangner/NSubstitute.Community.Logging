@@ -1,11 +1,10 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
 using Xunit;
 
 namespace NSubstitute.Logging.Test
 {
-    [Trait("Category", "Unit")]
     public class SubstituteLoggingRegistrarTests
     {
         private readonly IServiceProvider _serviceProvider = new ServiceCollection().AddSubstituteLoggers().BuildServiceProvider();

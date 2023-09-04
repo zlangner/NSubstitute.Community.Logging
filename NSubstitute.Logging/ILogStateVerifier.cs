@@ -8,7 +8,7 @@
         /// <summary>
         /// The message template that was used for logging.
         /// </summary>
-        string MessageTemplate { get; }
+        string OriginalFormat { get; }
 
         /// <summary>
         /// Gets the value associated with the specified key.
