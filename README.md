@@ -15,12 +15,35 @@ var mockLogger = serviceProvider.GetService<ILogger>();
 var mockLoggerT = serviceProvider.GetService<ILogger<MyClass>>();
 ```
 
-## Log Verification
-NSubstitute.Logging lets you easily assert that specific logging took place. All you need is any [NSubstitute](https://nsubstitute.github.io/) substitute ILogger. 
-Then can verify log events by:
+## Log Verification: Basic
+NSubstitute.Logging lets you easily assert that specific logging took place. All you need is any [NSubstitute](https://nsubstitute.github.io/) substitute ILogger.
+Then you can verify logs using syntax similar to how the application wrote them.
+See [LoggerExtensionsTests](https://github.com/zlangner/NSubstitute.Logging/blob/main/NSubstitute.Logging.Test/LoggerExtensionsTests.cs) for more examples.
+
+### Make sure specific LogInformation call occured
+``` csharp
+var Target = Substitute.For<ILogger>();
+var exception = new KeyNotFoundException();
+var message = "This is a {log} message";
+var args = new object[] { "log" };
+Microsoft.Extensions.Logging.LoggerExtensions.LogInformation(Target, exception, message, args);
+
+Target.Received(1)
+    .LogInformation(exception, message, args);
+
+Target.DidNotReceive()
+    .LogInformation(exception, message);
+Target.DidNotReceive()
+    .LogInformation(message, args);
+Target.DidNotReceive()
+    .LogInformation(message);
+```
+
+## Log Verification: Advanced
+Sometimes you don't want to or can't match on every nuance of a log message. For these cases there is `CallToLog` which behaves like `Arg.Is`
+for any provided argument and behaves like `Arg.Any` for omitted arguments. This allows you to verify log events by:
 - log level
-- message template starts with, contains, or exact match
-- inclusion of one or more specific keys in the structured log
+- OriginalFormat
 - event Id
 - exception
 - any combination of the above in the same log!
@@ -29,45 +52,57 @@ NOTE: `CallToLog` methods work with any [NSubstitute Recieved Calls](https://nsu
 
 ### Make sure no warnings or errors were logged while the test was running
 ``` csharp
-var logger = Substitute.For<ILogger>();
+var Target = Substitute.For<ILogger>();
+Microsoft.Extensions.Logging.LoggerExtensions.LogInformation(Target, "I am an informational log.");
 
-logger.LogInformation("I am an informational log.");
+Target.DidNotReceive()
+    .CallToLog(LogLevel.Warning);
 
-logger.CallToLog(LogLevel.Warning)
-  .MustNotHaveHappened();
-
-logger.CallToLog(LogLevel.Error)
-  .MustNotHaveHappened();
+Target.DidNotReceive()
+    .CallToLog(LogLevel.Error);
 ```
 
-### Make sure a specific message was logged
+### Make sure a similar message was logged
 ``` csharp
-var logger = Substitute.For<ILogger>();
+var Target = Substitute.For<ILogger>();
+Microsoft.Extensions.Logging.LoggerExtensions.LogInformation(Target, "I am an informational log.");
 
-logger.LogInformation("I am an informational log.");
-
-logger.CallToLog(LogLevel.Information, "I am an informational log.")
-  .MustHaveHappenedOnceExactly();
+Target.Received(1)
+    .CallToLog(LogLevel.Information, "I am an informational log.");
 ```
 
-### Make sure a structured log was created with specific values
+## Log Verification: Custom Logic
+Somes you want to verify the value of arguments provided to a Log but cannot match all the arguments or cannot match the exact value that was used.
+See [CallToLogPredicateTests](https://github.com/zlangner/NSubstitute.Logging/blob/main/NSubstitute.Logging.Test/CallToLogPredicateTests.cs) for more examples.
+
+### Match the message and some arguments exactly
 ``` csharp
-var logger = Substitute.For<ILogger>();
+var Target = Substitute.For<ILogger>();
+Microsoft.Extensions.Logging.LoggerExtensions.LogWarning(Target, "{ErrorCode} There were {ErrorCount} errors that happened on {Where}.", Guid.NewGuid(), 13, "earth");
 
-logger.LogInformation("the number is {Number}", 42);
-
-logger.CallToLog(LogLevel.Information, _ =>
-   _.MessageTemplate.Contains("the number is {Number}")
-   && _.KeyEquals("Number", 42)
-)
-  .MustHaveHappenedOnceExactly();
-
-logger.CallToLog(LogLevel.Information, _ =>
-   _.MessageTemplate.Contains("the number is {Number}")
-   && _.KeyEquals("Number", 123)
-)
-  .MustNotHaveHappened();
+Target.Received(1)
+    .CallToLog(LogLevel.Warning,
+    _ => _.OriginalFormat.Equals("{ErrorCode} There were {ErrorCount} errors that happened on {Where}.")
+        && _.KeyEquals("ErrorCount", 13)
+        && _.KeyEquals("Where", "earth")
+    );
 ```
 
-### More Examples
+### Match the message and arguments more generally
+``` csharp
+var Target = Substitute.For<ILogger>();
+var now = DateTime.Now;
+Microsoft.Extensions.Logging.LoggerExtensions.LogWarning(Target, "there were {oopies} things you might want to know about. {where} {when}", 13, "earth", now);
+var planets = new[] { "mars", "earth" };
+
+Target.Received(1)
+    .CallToLog(LogLevel.Warning,
+    _ => _.OriginalFormat.StartsWith("there were {oopies}")
+        && _.TryGetValue("oopies", out int oopies) && oopies > 10
+        && _.TryGetValue("where", out string where) && planets.Contains(where)
+        && _.TryGetValue("when", out DateTime when) && when <= DateTime.Now
+    );
+```
+
+## More Examples
 See the tests for more examples!!!
