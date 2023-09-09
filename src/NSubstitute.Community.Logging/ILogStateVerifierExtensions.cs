@@ -41,7 +41,7 @@ namespace NSubstitute.Community.Logging
 
             for (var i = 0; i < args.Length; i++)
             {
-                if (verifier.State[i].Value != args[i])
+                if (!verifier.State[i].Value.Equals(args[i]))
                 {
                     return false;
                 }
