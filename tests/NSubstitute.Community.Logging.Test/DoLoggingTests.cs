@@ -54,6 +54,8 @@ namespace NSubstitute.Community.Logging.Test
 
             Assert.NotNull(thrownEx);
             Assert.Equal("Don't do that", thrownEx.Message);
+
+            // the LogError happened exactly as expected
             _logger.Received(1)
                 .LogError(thrownEx, "Error encountered in {MethodName} and rethrown.", "Throw");
         }
