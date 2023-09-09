@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.Extensions.Logging;
 using Xunit;
 
-namespace NSubstitute.Logging.Test
+namespace NSubstitute.Community.Logging.Test
 {
     public class CallToLogPredicateTests
     {

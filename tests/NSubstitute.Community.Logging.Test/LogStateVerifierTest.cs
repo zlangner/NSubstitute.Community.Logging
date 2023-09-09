@@ -1,9 +1,9 @@
-﻿using NSubstitute.Logging.Internals;
+﻿using NSubstitute.Community.Logging.Internals;
 using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace NSubstitute.Logging.Test
+namespace NSubstitute.Community.Logging.Test
 {
     public class LogStateVerifierTest
     {

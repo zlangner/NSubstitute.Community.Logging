@@ -2,7 +2,7 @@
 using System;
 using Xunit;
 
-namespace NSubstitute.Logging.Test
+namespace NSubstitute.Community.Logging.Test
 {
     /// <summary>
     /// It would be nice to use Arg with the .CallToLog and LoggerExtension methods but they don't work so confirm they keep not working

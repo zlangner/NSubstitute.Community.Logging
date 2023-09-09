@@ -1,6 +1,6 @@
-﻿using NSubstitute.Logging.Internals;
+﻿using NSubstitute.Community.Logging.Internals;
 
-namespace NSubstitute.Logging
+namespace NSubstitute.Community.Logging
 {
     /// <summary>
     /// Provides additional functionity for ILogStateVerifier

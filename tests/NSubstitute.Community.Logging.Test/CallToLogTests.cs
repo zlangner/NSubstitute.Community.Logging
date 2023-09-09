@@ -2,7 +2,7 @@
 using System;
 using Xunit;
 
-namespace NSubstitute.Logging.Test
+namespace NSubstitute.Community.Logging.Test
 {
     public class CallToLogTests
     {

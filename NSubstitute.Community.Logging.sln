@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSubstitute.Logging", "NSubstitute.Logging\NSubstitute.Logging.csproj", "{DCF43C46-C298-4988-9B9B-D1384CBC9753}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSubstitute.Community.Logging", "src\NSubstitute.Community.Logging\NSubstitute.Community.Logging.csproj", "{DCF43C46-C298-4988-9B9B-D1384CBC9753}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSubstitute.Logging.Test", "NSubstitute.Logging.Test\NSubstitute.Logging.Test.csproj", "{F9C9D238-F1A2-452D-A548-1F3C9651FAE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSubstitute.Community.Logging.Test", "tests\NSubstitute.Community.Logging.Test\NSubstitute.Community.Logging.Test.csproj", "{F9C9D238-F1A2-452D-A548-1F3C9651FAE0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{86D85E49-E60A-45FE-9C73-42CAF21A3805}"
 	ProjectSection(SolutionItems) = preProject

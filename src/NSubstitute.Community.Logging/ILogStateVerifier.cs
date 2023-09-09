@@ -1,4 +1,4 @@
-﻿namespace NSubstitute.Logging
+﻿namespace NSubstitute.Community.Logging
 {
     /// <summary>
     /// Provides information about a log call that is being evaluated for execution

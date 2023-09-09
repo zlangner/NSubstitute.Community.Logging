@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
-using NSubstitute.Logging.Internals;
+using NSubstitute.Community.Logging.Internals;
 
-namespace NSubstitute.Logging
+namespace NSubstitute.Community.Logging
 {
     /// <summary>
     /// ILogger extension methods for common scenarios.

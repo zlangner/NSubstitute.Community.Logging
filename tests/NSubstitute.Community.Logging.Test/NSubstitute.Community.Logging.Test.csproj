@@ -29,8 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\NSubstitute\src\NSubstitute\NSubstitute.csproj" />
-    <ProjectReference Include="..\NSubstitute.Logging\NSubstitute.Logging.csproj" />
+    <ProjectReference Include="..\..\..\NSubstitute\src\NSubstitute\NSubstitute.csproj" />
+    <ProjectReference Include="..\..\src\NSubstitute.Community.Logging\NSubstitute.Community.Logging.csproj" />
   </ItemGroup>
 
 </Project>

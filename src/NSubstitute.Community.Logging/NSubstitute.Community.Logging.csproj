@@ -20,7 +20,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\NSubstitute\src\NSubstitute\NSubstitute.csproj" />
+    <ProjectReference Include="..\..\..\NSubstitute\src\NSubstitute\NSubstitute.csproj" />
   </ItemGroup>
 
 </Project>

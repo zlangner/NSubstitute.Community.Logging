@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace NSubstitute.Logging.Test
+namespace NSubstitute.Community.Logging.Test
 {
     public class LoggerExtensionsTests
     {

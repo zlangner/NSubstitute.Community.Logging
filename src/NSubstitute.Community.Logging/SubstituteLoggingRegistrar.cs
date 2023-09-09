@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace NSubstitute.Logging
+namespace NSubstitute.Community.Logging
 {
     /// <summary>
     /// Allows you to easily add fake logging to a IServiceCollection

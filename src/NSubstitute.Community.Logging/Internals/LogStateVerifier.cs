@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NSubstitute.Logging.Internals
+namespace NSubstitute.Community.Logging.Internals
 {
     internal struct LogStateVerifier : ILogStateVerifier
     {
