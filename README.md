@@ -105,4 +105,4 @@ Target.Received(1)
 ```
 
 ## More Examples
-See the tests for more examples!!!
+[See the tests](https://github.com/zlangner/NSubstitute.Logging/tree/main/tests) for more examples!!!
