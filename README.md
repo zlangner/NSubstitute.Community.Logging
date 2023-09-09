@@ -1,7 +1,7 @@
 # Introduction 
 NSubstitute.Community.Logging is a collection of helper methods that make it easy to inject substitute loggers into an IServiceProvider and verify that specific logging activity occurred. 
 
-# Getting Started fake
+# Getting Started
 First install NSubstitute.Community.Logging into your Test project from the internal nuget server.
 
 ## Substitute Logger
@@ -18,7 +18,7 @@ var mockLoggerT = serviceProvider.GetService<ILogger<MyClass>>();
 ## Log Verification: Basic
 NSubstitute.Community.Logging lets you easily assert that specific logging took place. All you need is any [NSubstitute](https://nsubstitute.github.io/) substitute ILogger.
 Then you can verify logs using syntax similar to how the application wrote them.
-See [LoggerExtensionsTests](https://github.com/zlangner/NSubstitute.Community.Logging/blob/main/NSubstitute.Community.Logging.Test/LoggerExtensionsTests.cs) for more examples.
+See [LoggerExtensionsTests](https://github.com/zlangner/NSubstitute.Logging/blob/main/tests/NSubstitute.Community.Logging.Test/LoggerExtensionsTests.cs) for more examples.
 
 ### Make sure specific LogInformation call occured
 ``` csharp
@@ -73,7 +73,7 @@ Target.Received(1)
 
 ## Log Verification: Custom Logic
 Somes you want to verify the value of arguments provided to a Log but cannot match all the arguments or cannot match the exact value that was used.
-See [CallToLogPredicateTests](https://github.com/zlangner/NSubstitute.Community.Logging/blob/main/NSubstitute.Community.Logging.Test/CallToLogPredicateTests.cs) for more examples.
+See [CallToLogPredicateTests](https://github.com/zlangner/NSubstitute.Logging/blob/main/tests/NSubstitute.Community.Logging.Test/CallToLogPredicateTests.cs) for more examples.
 
 ### Match the message and some arguments exactly
 ``` csharp
