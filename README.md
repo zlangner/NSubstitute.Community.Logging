@@ -2,7 +2,7 @@
 NSubstitute.Community.Logging is a collection of helper methods that make it easy to inject substitute loggers into an IServiceProvider and verify that specific logging activity occurred. 
 
 # Getting Started
-First install NSubstitute.Community.Logging into your Test project from the internal nuget server.
+First install NSubstitute.Community.Logging into your test project from Nuget.
 
 ## Substitute Logger
 Just call `.AddSubstituteLoggers()` on your ServiceCollection before buiding it into an IServiceProvider to add ILoggerFactory, ILogger, and ILogger<T> generated using NSubstitute.
