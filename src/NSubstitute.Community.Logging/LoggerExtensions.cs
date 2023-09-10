@@ -13,7 +13,7 @@ namespace NSubstitute.Community.Logging
         //------------------------------------------DEBUG------------------------------------------//
 
         /// <summary>
-        /// Formats and writes a debug log message.
+        /// Use with NSubstitute to verify calls to LogDebug extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="eventId">The event id associated with the log.</param>
@@ -27,7 +27,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes a debug log message.
+        /// Use with NSubstitute to verify calls to LogDebug extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="eventId">The event id associated with the log.</param>
@@ -40,7 +40,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes a debug log message.
+        /// Use with NSubstitute to verify calls to LogDebug extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="exception">The exception to log.</param>
@@ -53,7 +53,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes a debug log message.
+        /// Use with NSubstitute to verify calls to LogDebug extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="message">Format string of the log message in message template format. Example: <c>"User {User} logged in from {Address}"</c></param>
@@ -67,7 +67,7 @@ namespace NSubstitute.Community.Logging
         //------------------------------------------TRACE------------------------------------------//
 
         /// <summary>
-        /// Formats and writes a trace log message.
+        /// Use with NSubstitute to verify calls to LogTrace extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="eventId">The event id associated with the log.</param>
@@ -81,7 +81,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes a trace log message.
+        /// Use with NSubstitute to verify calls to LogTrace extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="eventId">The event id associated with the log.</param>
@@ -94,7 +94,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes a trace log message.
+        /// Use with NSubstitute to verify calls to LogTrace extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="exception">The exception to log.</param>
@@ -107,7 +107,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes a trace log message.
+        /// Use with NSubstitute to verify calls to LogTrace extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="message">Format string of the log message in message template format. Example: <c>"User {User} logged in from {Address}"</c></param>
@@ -121,7 +121,7 @@ namespace NSubstitute.Community.Logging
         //------------------------------------------INFORMATION------------------------------------------//
 
         /// <summary>
-        /// Formats and writes an informational log message.
+        /// Use with NSubstitute to verify calls to LogInformation extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="eventId">The event id associated with the log.</param>
@@ -135,7 +135,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes an informational log message.
+        /// Use with NSubstitute to verify calls to LogInformation extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="eventId">The event id associated with the log.</param>
@@ -148,7 +148,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes an informational log message.
+        /// Use with NSubstitute to verify calls to LogInformation extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="exception">The exception to log.</param>
@@ -161,7 +161,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes an informational log message.
+        /// Use with NSubstitute to verify calls to LogInformation extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="message">Format string of the log message in message template format. Example: <c>"User {User} logged in from {Address}"</c></param>
@@ -175,7 +175,7 @@ namespace NSubstitute.Community.Logging
         //------------------------------------------WARNING------------------------------------------//
 
         /// <summary>
-        /// Formats and writes a warning log message.
+        /// Use with NSubstitute to verify calls to LogWarning extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="eventId">The event id associated with the log.</param>
@@ -189,7 +189,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes a warning log message.
+        /// Use with NSubstitute to verify calls to LogWarning extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="eventId">The event id associated with the log.</param>
@@ -202,7 +202,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes a warning log message.
+        /// Use with NSubstitute to verify calls to LogWarning extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="exception">The exception to log.</param>
@@ -215,7 +215,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes a warning log message.
+        /// Use with NSubstitute to verify calls to LogWarning extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="message">Format string of the log message in message template format. Example: <c>"User {User} logged in from {Address}"</c></param>
@@ -229,7 +229,7 @@ namespace NSubstitute.Community.Logging
         //------------------------------------------ERROR------------------------------------------//
 
         /// <summary>
-        /// Formats and writes an error log message.
+        /// Use with NSubstitute to verify calls to LogError extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="eventId">The event id associated with the log.</param>
@@ -243,7 +243,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes an error log message.
+        /// Use with NSubstitute to verify calls to LogError extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="eventId">The event id associated with the log.</param>
@@ -256,7 +256,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes an error log message.
+        /// Use with NSubstitute to verify calls to LogError extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="exception">The exception to log.</param>
@@ -269,7 +269,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes an error log message.
+        /// Use with NSubstitute to verify calls to LogError extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="message">Format string of the log message in message template format. Example: <c>"User {User} logged in from {Address}"</c></param>
@@ -283,7 +283,7 @@ namespace NSubstitute.Community.Logging
         //------------------------------------------CRITICAL------------------------------------------//
 
         /// <summary>
-        /// Formats and writes a critical log message.
+        /// Use with NSubstitute to verify calls to LogCritical extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="eventId">The event id associated with the log.</param>
@@ -297,7 +297,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes a critical log message.
+        /// Use with NSubstitute to verify calls to LogCritical extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="eventId">The event id associated with the log.</param>
@@ -310,7 +310,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes a critical log message.
+        /// Use with NSubstitute to verify calls to LogCritical extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="exception">The exception to log.</param>
@@ -323,7 +323,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes a critical log message.
+        /// Use with NSubstitute to verify calls to LogCritical extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="message">Format string of the log message in message template format. Example: <c>"User {User} logged in from {Address}"</c></param>
@@ -337,7 +337,7 @@ namespace NSubstitute.Community.Logging
         //------------------------------------------LogLevel------------------------------------------//
 
         /// <summary>
-        /// Formats and writes a log message at the specified log level.
+        /// Use with NSubstitute to verify calls to Log extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="logLevel">Entry will be written on this level.</param>
@@ -349,7 +349,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes a log message at the specified log level.
+        /// Use with NSubstitute to verify calls to Log extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="logLevel">Entry will be written on this level.</param>
@@ -362,7 +362,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes a log message at the specified log level.
+        /// Use with NSubstitute to verify calls to Log extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="logLevel">Entry will be written on this level.</param>
@@ -375,7 +375,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats and writes a log message at the specified log level.
+        /// Use with NSubstitute to verify calls to Log extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
         /// <param name="logLevel">Entry will be written on this level.</param>
@@ -401,7 +401,7 @@ namespace NSubstitute.Community.Logging
         }
 
         /// <summary>
-        /// Formats the message and creates a scope.
+        /// Use with NSubstitute to verify calls to BeginScope extension method.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to create the scope in.</param>
         /// <param name="messageFormat">Format string of the log message in message template format. Example: "User {User} logged in from {Address}".</param>
