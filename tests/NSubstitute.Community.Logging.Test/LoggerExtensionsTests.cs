@@ -1114,5 +1114,15 @@ namespace NSubstitute.Community.Logging.Test
             Target.DidNotReceive()
                 .Log(logLevel, message);
         }
+
+        [Fact]
+        public void BeginScope_Message_Args()
+        {
+            using var scope = Microsoft.Extensions.Logging.LoggerExtensions.BeginScope(Target, "User {User} logged in from {Address}", "Mike@example.com", "login.example.com");
+
+            // this exact BeginScope call happened
+            Target.Received(1)
+                .BeginScope("User {User} logged in from {Address}", "Mike@example.com", "login.example.com");
+        }
     }
 }

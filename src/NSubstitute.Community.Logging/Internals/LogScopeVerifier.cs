@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace NSubstitute.Community.Logging.Internals
 {
-    internal struct LogStateVerifier : ILogStateVerifier
+    internal struct LogScopeVerifier : ILogStateVerifier
     {
-        private readonly IReadOnlyList<KeyValuePair<string, object>> _state;
+        private readonly IReadOnlyCollection<KeyValuePair<string, object>> _state;
 
-        public LogStateVerifier(IReadOnlyList<KeyValuePair<string, object>> state)
+        public LogScopeVerifier(IReadOnlyCollection<KeyValuePair<string, object>> state)
         {
             _state = state ?? throw new ArgumentNullException(nameof(state));
         }
@@ -27,7 +27,7 @@ namespace NSubstitute.Community.Logging.Internals
         }
 
         /// <inheritdoc/>
-        public IReadOnlyList<KeyValuePair<string, object>> State => _state;
+        public IReadOnlyCollection<KeyValuePair<string, object>> State => _state;
 
         /// <inheritdoc/>
         public bool TryGetValue<T>(string key, out T value)
@@ -57,15 +57,18 @@ namespace NSubstitute.Community.Logging.Internals
                 return false;
             }
 
-            for (var i = 0; i < args.Length; i++)
+            var i = 0;
+            foreach(var state in this.State)
             {
-                if (!this.State[i].Value.Equals(args[i]))
+                if (!state.Value.Equals(args[i]))
                 {
                     return false;
                 }
+
+                i++;
             }
 
             return true;
-        }
+        }        
     }
 }

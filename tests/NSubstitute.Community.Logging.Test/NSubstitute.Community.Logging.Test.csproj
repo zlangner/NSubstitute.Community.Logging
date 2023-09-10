@@ -4,6 +4,7 @@
     <TargetFrameworks>net48;net6.0</TargetFrameworks>
 
     <IsPackable>false</IsPackable>
+    <LangVersion>9</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

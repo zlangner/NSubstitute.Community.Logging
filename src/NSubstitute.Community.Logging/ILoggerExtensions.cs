@@ -256,5 +256,24 @@ namespace NSubstitute.Community.Logging
                     Arg.Any<Func<IReadOnlyList<KeyValuePair<string, object>>, Exception, string>>()
                 );
         }
+
+        /// <summary>
+        /// Finds ILogger.BeginScope() calls made with the logLevel and logStateVerifier provided.
+        /// </summary>
+        /// <param name="logger">The <see cref="ILogger"/> to create the scope in.</param>
+        /// <param name="predicate"></param>
+        /// <returns>A disposable scope object. Can be null.</returns>
+        public static IDisposable CallToBeginScope(this ILogger logger, Func<ILogStateVerifier, bool> predicate)
+        {
+            if (logger == null)
+            {
+                throw new ArgumentNullException(nameof(logger));
+            }
+
+            return logger
+                .BeginScope(
+                    Arg.Is<IReadOnlyCollection<KeyValuePair<string, object>>>(list => predicate(new LogScopeVerifier(list)))
+                );
+        }
     }
 }

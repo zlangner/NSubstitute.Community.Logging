@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace NSubstitute.Community.Logging.Test
@@ -77,6 +78,23 @@ namespace NSubstitute.Community.Logging.Test
             var otherEx = new Exception();
             Target.DidNotReceive()
                 .CallToLog(LogLevel.Error, otherEx);
+        }
+
+        [Fact]
+        public void BeginScope_State()
+        {
+            using var scope = Target.BeginScope<IReadOnlyCollection<KeyValuePair<string, object>>>(new Dictionary<string, object> {
+                { "UserId", 123456 },
+                { "UserEmail","Mike@example.com" },
+                { "Address","login.example.com" },
+            });
+
+            // this exact BeginScope call happened
+            Target.Received(1)
+                .CallToBeginScope(_ => _.KeyEquals("UserId", 123456)
+                    && _.KeyEquals("UserEmail", "Mike@example.com")
+                    && _.KeyEquals("Address", "login.example.com")
+            );
         }
     }
 }

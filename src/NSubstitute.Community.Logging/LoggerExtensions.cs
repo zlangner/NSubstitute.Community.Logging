@@ -399,5 +399,25 @@ namespace NSubstitute.Community.Logging
                     Arg.Any<Func<IReadOnlyList<KeyValuePair<string, object>>, Exception, string>>()
                 );
         }
+
+        /// <summary>
+        /// Formats the message and creates a scope.
+        /// </summary>
+        /// <param name="logger">The <see cref="ILogger"/> to create the scope in.</param>
+        /// <param name="messageFormat">Format string of the log message in message template format. Example: "User {User} logged in from {Address}".</param>
+        /// <param name="args">An object array that contains zero or more objects to format.</param>
+        /// <returns>A disposable scope object. Can be null.</returns>
+        public static IDisposable BeginScope(this ILogger logger, string messageFormat, params object[] args)
+        {
+            if (logger == null)
+            {
+                throw new ArgumentNullException(nameof(logger));
+            }
+
+            return logger
+                .BeginScope(
+                    Arg.Is<IReadOnlyList<KeyValuePair<string, object>>>(list => new LogStateVerifier(list).MessageMatches(messageFormat, args))
+                );
+        }
     }
 }

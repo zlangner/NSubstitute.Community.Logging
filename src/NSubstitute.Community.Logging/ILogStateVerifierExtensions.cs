@@ -1,6 +1,4 @@
-﻿using NSubstitute.Community.Logging.Internals;
-
-namespace NSubstitute.Community.Logging
+﻿namespace NSubstitute.Community.Logging
 {
     /// <summary>
     /// Provides additional functionity for ILogStateVerifier
@@ -25,29 +23,6 @@ namespace NSubstitute.Community.Logging
                     (actualValue == null && expectedValue == null)
                     || (actualValue != null && actualValue.Equals(expectedValue))
                 );
-        }
-
-        internal static bool MessageMatches(this LogStateVerifier verifier, string message, params object[] args)
-        {
-            if (verifier.OriginalFormat != message)
-            {
-                return false;
-            }
-
-            if (args.Length != verifier.State.Count - 1) /* minus 1 to skip the "{OriginalFormat}" entry */
-            {
-                return false;
-            }
-
-            for (var i = 0; i < args.Length; i++)
-            {
-                if (!verifier.State[i].Value.Equals(args[i]))
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
     }
 }
