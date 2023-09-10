@@ -1,8 +1,10 @@
-﻿using Logging.Test.Internals;
+﻿using Example.Test.Internals;
 using System;
 using Xunit;
+using NSubstitute;
+using NSubstitute.Community.Logging;
 
-namespace NSubstitute.Community.Logging.Test
+namespace Example.Test
 {
     /// <summary>
     /// These tests show what it would look like when geting log calls made by a class that uses Microsoft.Extensions.Logging

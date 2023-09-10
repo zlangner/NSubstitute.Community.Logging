@@ -2,7 +2,7 @@
 using System;
 
 // not using NSubstitute.Community.Logging namespace so this will not use the NSubstitute.Community.Logging.LoggerExtensions
-namespace Logging.Test.Internals
+namespace Example.Test.Internals
 {
     public class DoScopedLogging
     {
