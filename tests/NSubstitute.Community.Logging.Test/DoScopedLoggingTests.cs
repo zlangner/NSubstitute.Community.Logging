@@ -2,21 +2,24 @@
 using System;
 using Xunit;
 using NSubstitute;
-using NSubstitute.Community.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Example.Test
 {
+    // import inside namespace so these extension methods are used over Microsoft.Extensions.Logging
+    using NSubstitute.Community.Logging;
+
     /// <summary>
     /// These tests show what it would look like when geting log calls made by a class that uses Microsoft.Extensions.Logging
     /// </summary>
     public class DoScopedLoggingTests
     {
-        private readonly Microsoft.Extensions.Logging.ILogger<DoScopedLogging> _logger;
+        private readonly ILogger<DoScopedLogging> _logger;
         private readonly DoScopedLogging Target;
 
         public DoScopedLoggingTests()
         {
-            _logger = Substitute.For<Microsoft.Extensions.Logging.ILogger<DoScopedLogging>>();
+            _logger = Substitute.For<ILogger<DoScopedLogging>>();
             Target = new DoScopedLogging(_logger);
         }
 
@@ -37,7 +40,7 @@ namespace Example.Test
 
             // a LogTrace happened with the expected message template
             _logger.Received(1)
-                .CallToLog(Microsoft.Extensions.Logging.LogLevel.Trace, "{a} + {b} = {c}");
+                .CallToLog(LogLevel.Trace, "{a} + {b} = {c}");
 
             // the LogTrace happened exactly as expected
             _logger.Received(1)
@@ -45,9 +48,9 @@ namespace Example.Test
 
             // no errors or warnings were logged
             _logger.DidNotReceive()
-                .CallToLog(Microsoft.Extensions.Logging.LogLevel.Error);
+                .CallToLog(LogLevel.Error);
             _logger.DidNotReceive()
-                .CallToLog(Microsoft.Extensions.Logging.LogLevel.Warning);
+                .CallToLog(LogLevel.Warning);
         }
 
         [Fact]
