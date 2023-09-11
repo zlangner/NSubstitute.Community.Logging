@@ -17,10 +17,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\NSubstitute\src\NSubstitute\NSubstitute.csproj" />
+    <PackageReference Include="NSubstitute" Version="5.1.0" />
   </ItemGroup>
 
 </Project>
