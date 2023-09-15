@@ -4,14 +4,26 @@
     <TargetFrameworks>net48;netstandard2.0;net6.0</TargetFrameworks>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Copyright></Copyright>
+    <Copyright>Copyright (c) Zach Langner 2023</Copyright>
     <Version>0.0.1</Version>
-    <RepositoryType>Git</RepositoryType>
-    <Description>A collection of methods to make verifying log messages easier.</Description>
+    <Authors>Zach Langner</Authors>
+    <AssemblyName>NSubstitute.Community.Logging</AssemblyName>
+    <PackageId>NSubstitute.Community.Logging</PackageId>
+    <Description>NSubstitute.Community.Logging lets you easily assert that specific logging took place. All you need is any NSubstitute created ILogger to get started.</Description>
+    <PackageTags>mocking;mocks;testing;unit-testing;TDD;AAA;logging</PackageTags>
+    <PackageProjectUrl>https://github.com/zlangner/NSubstitute.Community.Logging/</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/zlangner/NSubstitute.Community.Logging/</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>    
   </PropertyGroup>
 
   <ItemGroup>
     <InternalsVisibleTo Include="$(AssemblyName).Test" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Link="README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
   
   <ItemGroup>
